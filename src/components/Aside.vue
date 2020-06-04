@@ -11,7 +11,7 @@
                                 >Popular
                             </button>
                         </b-col>
-                        <b-col cols="12" lg="4">
+                        <b-col cols="12" lg="4" class="pl-lg-0">
                             <button 
                                 @click="changeDisplay('TopRated')"
                                 :class="{active: display === 'TopRated'}"
@@ -57,7 +57,7 @@ export default {
     },
     data: () => ({
         display: 'Popular',
-        apiKey: `33bd2f7afdbe4b1c9058dbae3a793b92`
+        apiKey: `a86595eef9344f5690b5c41082f424d4`
     }),
     methods: {
         changeDisplay(value) {
@@ -86,7 +86,7 @@ export default {
         background-color: #3e3668
         color: #ffffff
         #header
-            padding: 15px 10px 15px 0
+            padding: 10px 8px 10px 0
             overflow: hidden
         #content
             height: 42px

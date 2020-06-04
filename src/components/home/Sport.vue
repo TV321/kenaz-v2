@@ -47,11 +47,28 @@ export default {
         ],
         linkText: ['See all', 'Slles sehen']
     }),
+    computed: {
+        country() {
+            if(this.lang === '0') {
+                return 'us'
+            } else {
+                return 'de'
+            }
+        }
+    },
     mounted() {
-        this.fetchNews('sport', 3)
+        this.fetchNews('sport', 3, this.country)
             .then(resp => {
                 this.news = resp
             })
+    },
+    watch: {
+        country() {
+            this.fetchNews('sport', 3, this.country)
+                .then(resp => {
+                    this.news = resp
+                })
+        }
     }
 }
 </script>
@@ -76,6 +93,8 @@ export default {
             color: #363f48
             font-weight: 600
             font-size: 1em
+            width: 100%
+            word-wrap: break-word
         p
             font-family: 'Varela Round', sans-serif
             color: #666666

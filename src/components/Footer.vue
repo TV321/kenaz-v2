@@ -17,10 +17,10 @@
                         </b-container>
                     </b-col>
                     <b-col cols="4" class="d-flex align-items-center">
-                        <h3>Newsletter</h3>
+                        <h3>{{ title[0]}}</h3>
                     </b-col>
                     <b-col cols="4" class="d-flex align-items-center">
-                        <h3>Tags Widget</h3>
+                        <h3>{{ title[1]}}</h3>
                     </b-col>
                 </b-row>
                 <b-row class="mb-5">
@@ -53,8 +53,8 @@
                             </b-row>
                             <b-row>
                                 <form action="" class="footer-form">
-                                    <input type="text" placeholder="Your mail">
-                                    <input type="submit" value="Subscribe">
+                                    <input type="text" :placeholder="input.text">
+                                    <input type="submit" :value="input.submit">
                                 </form>
                             </b-row>
                         </b-container>
@@ -82,13 +82,13 @@
 
                 <b-row>
                     <b-col cols="4" class="text-left">
-                        <h3 class="post-titles">Featured</h3>
+                        <h3 class="post-titles">{{ title[2]}}</h3>
                     </b-col>
                     <b-col cols="4" class="text-left">
-                        <h3 class="post-titles">Random Posts</h3>
+                        <h3 class="post-titles">{{ title[3]}}</h3>
                     </b-col>
                     <b-col cols="4" class="text-left">
-                        <h3 class="post-titles">Recently Viewed</h3>
+                        <h3 class="post-titles">{{ title[4]}}</h3>
                     </b-col>
                 </b-row>
                 <b-row>
@@ -203,8 +203,26 @@
 <script>
 import moment from 'moment'
 export default {
-    props: ['recentlyViewed'],
+    props: ['recentlyViewed', 'lang'],
     name: 'Footer',
+    data: () => ({
+        titles: [ 
+            ['Newsletter', 'Tags Widget', 'Featured', 'Random Posts', 'Recently Viewed'],
+            ['Newsletter', 'Tags Widget', 'Vorgestellt', 'Zufällige Beiträge', 'Zuletzt Angesehen'],
+        ],
+        inputs: [
+            {text: 'your mail', submit: 'subscribe'},
+            {text: 'ihre e-mail', submit: 'abonnieren'},
+        ]
+    }),
+    computed: {
+        title() {
+            return this.titles[+this.lang]
+        },
+        input() {
+            return this.inputs[+this.lang]
+        }
+    },
     filters: {
         date(value){
 			const timestamp = new Date(value).getTime()
@@ -233,20 +251,25 @@ export default {
         font-family: Bitter
         .footer-form
             display: flex
-            flex-flow: row wrap
+            // flex-flow: row wrap
             align-items: flex-start
         input
+            display: block
+            width: 100%
             font-family: 'Varela Round', sans-serif
+            outline: none
             padding: 0 20px
             height: 50px
             font-size: .9em
             border: 0
             box-sizing: border-box
+            text-transform: capitalize
             &[type=text]
+                display: block
                 background-color: #333333
                 color: #999999
-                width: 180px
             &[type=submit]
+                padding: 0
                 background-color: #4d4382
                 color: #cccccc
                 transition: all .3s linear

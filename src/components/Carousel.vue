@@ -29,6 +29,7 @@
 									<h2>{{ item.title }}</h2>
 								</div>
 								<router-link 
+									@click.native="updateData(item)"
 									:to="{ name: 'Single', params: { title: item.title, date: item.publishedAt, img: item.urlToImage, content: item.content }}"
 									tag="button">
 									{{ buttonText[+lang]}}
@@ -47,14 +48,23 @@ import axios from 'axios'
 import moment from 'moment'
 export default {
 	data: () => ({
-		apiKey: '33bd2f7afdbe4b1c9058dbae3a793b92',
+		apiKey: 'a86595eef9344f5690b5c41082f424d4',
 		news: [],
 		slide: 0,
 		sliding: null,
 		buttonText: ['Read article', 'Artikel lesen'],
 		
 	}),
-	props: ['lang'],
+	props: ['lang', 'updateData'],
+	computed: {
+		country() {
+			if(this.lang === '0') {
+				return 'us'
+			} else {
+				return 'de'
+			}
+		}
+	},
 	methods: {
 		onSlideStart(slide) {
 			this.sliding = true
@@ -70,7 +80,7 @@ export default {
 		},
 		async fetchNews() {
 			const url = `https://newsapi.org/v2/top-headlines?`
-			const query = `country=us&pageSize=4&apiKey=${ this.apiKey }`
+			const query = `country=${ this.country }&pageSize=4&apiKey=${ this.apiKey }`
 
 			const fetch = await axios.get(url + query)
 			this.news = fetch.data.articles
@@ -88,6 +98,11 @@ export default {
 	},
 	mounted() {
 		this.fetchNews()
+	},
+	watch: {
+		country() {
+			this.fetchNews()
+		}
 	}
 }
 </script>

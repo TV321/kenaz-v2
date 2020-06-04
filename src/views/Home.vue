@@ -1,7 +1,7 @@
 <template>
 	<b-container fluid class="px-0"> 
   		<div class="home">
-			<Carousel :lang="lang"/>
+			<Carousel :lang="lang" :updateData="updateData"/>
 			
 			<b-container>
 				<b-row>
@@ -65,10 +65,10 @@ import moment from 'moment'
 
 export default {
 	name: 'Home',
-	props: ['lang'],
+	props: ['lang', 'updateData'],
 	data: () => ({
 		news: [],
-		apiKey: '33bd2f7afdbe4b1c9058dbae3a793b92'
+		apiKey: 'a86595eef9344f5690b5c41082f424d4'
 	}),
   	components:	{
 		Carousel,
@@ -85,9 +85,9 @@ export default {
 		CarouselBottom
 	  },
 	  methods: {
-		async fetchNews (category, pageSize) {
+		async fetchNews (category, pageSize, country) {
 			const url = `https://newsapi.org/v2/top-headlines?`
-			const query = `country=us&pageSize=${ pageSize }&category=${ category }&apiKey=${ this.apiKey }`
+			const query = `country=${ country }&pageSize=${ pageSize }&category=${ category }&apiKey=${ this.apiKey }`
 
 			const fetch = await axios.get(url + query)
 			return fetch.data.articles

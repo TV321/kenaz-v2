@@ -2,7 +2,7 @@
 
     <b-container fluid class="px-0">
         <div class="category">
-            <Carousel :lang="lang"/>
+            <Carousel :lang="lang" :updateData="updateData"/>
             <b-container>
                 <b-row>
                     <b-col cols="8">

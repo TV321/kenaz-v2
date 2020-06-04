@@ -65,7 +65,7 @@ import moment from 'moment'
 export default {
     name: 'LocalNews',
     data: () => ({
-        apiKey: '33bd2f7afdbe4b1c9058dbae3a793b92',
+        apiKey: 'a86595eef9344f5690b5c41082f424d4',
         slide: 0,
         sliding: null,
         news: [],

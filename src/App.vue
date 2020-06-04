@@ -5,7 +5,7 @@
 		<Banner />
 
     	<router-view :updateData="updateData" :lang="lang"/>
-		<Footer :recentlyViewed="recentlyViewedList"/>
+		<Footer :recentlyViewed="recentlyViewedList" :lang="lang"/>
   	</div>
 </template>
 

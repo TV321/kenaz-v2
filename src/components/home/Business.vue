@@ -43,11 +43,31 @@ export default {
         ],
         linkText: ['See all', 'Slles sehen']
     }),
+    computed: {
+        country() {
+            if(this.lang === '0') {
+                return 'us'
+            } else {
+                return 'de'
+            }
+        }
+    },
     mounted() {
-        this.fetchNews('business', 4)
+        this.fetchNews('business', 4, this.country)
             .then(resp => {
                 this.news = resp
             })
+    },
+    watch: {
+        country() {
+            this.fetchNews('business', 4, this.country)
+                .then(resp => {
+                    this.news = resp
+                })
+        }
+    },
+    methods: {
+
     },
 }
 </script>
@@ -73,6 +93,10 @@ export default {
             color: #363f48
             font-weight: 600
             font-size: .9em
+            height: 70px
+            overflow: hidden
+            width: 100%
+            word-wrap: break-word
         p
             font-family: 'Varela Round', sans-serif
             color: #666666

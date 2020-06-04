@@ -76,7 +76,7 @@ export default {
     name: 'CategoryNews',
     props: ['name', 'link','lang', 'updateData'],
     data: () => ({
-        apiKey: '33bd2f7afdbe4b1c9058dbae3a793b92',
+        apiKey: 'a86595eef9344f5690b5c41082f424d4',
         news: [],
         queryStringInput: '',
         dummyList: [],
@@ -87,11 +87,18 @@ export default {
 
     }),
     computed: {
+        country() {
+            if(this.lang === '0') {
+                return 'us'
+            } else {
+                return 'de'
+            }
+        },
         query() {
             if(this.$route.query.queryString) {
-                return `category=${ this.link }&pageSize=30&country=us&apiKey=${ this.apiKey }&q=${this.$route.query.queryString}`
+                return `category=${ this.link }&pageSize=30&country=${ this.country }&apiKey=${ this.apiKey }&q=${this.$route.query.queryString}`
             } else {
-                return `category=${ this.link }&pageSize=30&country=us&apiKey=${ this.apiKey }`
+                return `category=${ this.link }&pageSize=30&country=${ this.country }&apiKey=${ this.apiKey }`
             }
         },
         chunkedList() {

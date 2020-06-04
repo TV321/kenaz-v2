@@ -1,6 +1,6 @@
 <template>
     <b-container class="p-0">
-        <div id="comments">
+        <div id="commentsAside">
             <div class="asideCard" v-for="n in 5" :key="n">
                 <b-row>
                     <b-col cols="12" lg="7">
@@ -30,7 +30,7 @@ export default {
 </script>
 
 <style lang="sass">
-    #comments
+    #commentsAside
         .asideCard
             background-color: #4d4382
             padding: 6% 9%
